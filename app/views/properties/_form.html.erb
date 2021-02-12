@@ -1,0 +1,52 @@
+<%= form_with(model: property, local: true) do |form| %>
+  <% if property.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(property.errors.count, "error") %> prohibited this property from being saved:</h2>
+      <ul>
+      <% property.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </div>
+  <div class="field">
+    <%= form.label :rent %><br>
+    <%= form.number_field :rent %>円
+  </div>
+  <div class="field">
+    <%= form.label :address %><br>
+    <%= form.text_area :address %>
+  </div>
+  <div class="field">
+    <%= form.label :age %><br>
+    <%= form.number_field :age %>年
+  </div>
+  <div class="field">
+    <%= form.label :other %><br>
+    <%= form.text_area :other %>
+  </div>
+  <%= form.fields_for :stations do |station| %>
+  <div>
+    <h1>最寄駅<%= 1 + station.index.to_i %></h1>
+  </div>
+　　<div class="field">
+  　　<%= station.label :route_name %><br>
+  　　<%= station.text_field :route_name %>
+　　</div>
+　　<div class="field">
+  　　<%= station.label :station_name %><br>
+  　　<%= station.text_field :station_name %>
+　　</div>
+　　<div class="field">
+  　　<%= station.label :access %><br>
+  　　 <%= station.text_field :access %>分<br>
+　　</div>  
+  <% end %>
+  <div class="actions">
+    <%= form.submit "登録する" %>
+  </div>
+<% end %>
